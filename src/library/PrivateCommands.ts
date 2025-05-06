@@ -20,6 +20,7 @@ export const PrivateCommands: { [key: string]: Command; } = {
         throw new Error(`Пользователь ${user} не может быть заблокирован.`);
       voice.ban(user.id);
       await voice.block(user);
+      await voice.updateConfig();
       return `Пользователь ${user} перманентно заблокирован.`;
     }
   },
@@ -34,6 +35,7 @@ export const PrivateCommands: { [key: string]: Command; } = {
       if (user.permissions.has('MoveMembers'))
         throw new Error(`Пользователь ${user} не может быть заблокирован.`);
       await voice.block(user);
+      await voice.updateConfig();
       return `Пользователь ${user} заблокирован до пересоздания.`;
     }
   },
@@ -50,6 +52,7 @@ export const PrivateCommands: { [key: string]: Command; } = {
         throw new Error(`Пользователь ${user} не был заблокирован.`);
       voice.unban(user.id);
       await voice.unblock(user);
+      await voice.updateConfig();
       return `Пользователь ${user} полностью разблокирован.`;
     }
   },
